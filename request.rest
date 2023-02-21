@@ -1,0 +1,23 @@
+POST http://localhost:3000/createuser
+Content-Type: application/json
+
+{
+  "fullName": "user4sfrg",
+  "email": "userafsef@mailinator.com",
+  "password": "useraeefs",
+  "phone": "0983728753"
+}
+
+###
+PATCH http://localhost:3000/1
+Content-Type: application/json
+
+{
+  "phone": "09837287511"
+}
+
+###
+GET http://localhost:3000/getuser
+
+###
+DELETE http://localhost:3000/2
