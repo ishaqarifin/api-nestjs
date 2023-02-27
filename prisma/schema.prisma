@@ -12,30 +12,55 @@ datasource db {
 
 model User {
   userId             Int       @id @default(autoincrement())
-  email              String    @unique
-  password           String
-  PKPass             String?
   fullName           String
-  recordId           String?
-  code_comp          String?
+  email              String    @unique
+  address            String
+  password           String
   phone              String
   photo              String?
+  PKPass             String?
+  identitas          String
   lastPasswordChange String?
   wrongPassRetry     String?
-  address            String?
-  division           String?
-  department         String?
-  directSuperId      String?
   device             String?
   lastLogin          DateTime?
   firebaseToken      String?
-  leaveBalance       Decimal?
   officeLocation     String?
   changeNo           Int?
   createBy           String?
   createDate         DateTime  @default(now())
   changeBy           String?
   changeDate         DateTime?
-  shift              String?
   joainDate          DateTime?
+}
+
+model Book {
+  id              Int        @id @default(autoincrement())
+  writer          String
+  publisher       String
+  publicationYear String
+  noISBN          String
+  loan            Loan[]
+  category        Category[]
+}
+
+model Loan {
+  pinjamanId Int      @id @default(autoincrement())
+  book       Book?    @relation(fields: [bookId], references: [id])
+  bookId     Int?
+  userId     Int
+  loanDate   DateTime @default(now())
+  dueDate    DateTime
+}
+
+model Category {
+  id     Int    @id @default(autoincrement())
+  book   Book   @relation(fields: [bookId], references: [id])
+  bookId Int
+  name   String
+}
+
+model Transaction {
+  id     Int @id @default(autoincrement())
+  idBook Int
 }
